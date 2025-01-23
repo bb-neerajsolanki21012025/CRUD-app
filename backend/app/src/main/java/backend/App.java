@@ -46,8 +46,10 @@ public class App extends AbstractVerticle {
         router.post("/").handler(this::putDetails);
         router.delete("/").handler(this::dltDetails);
         router.put("/").handler(this::updDetails);
+        
 
         router.get("/product").handler(this::getSearch);
+        router.get("/*").handler(this::getOneElement);
 
         // Create an HTTP server
         vertx.createHttpServer()
@@ -59,6 +61,32 @@ public class App extends AbstractVerticle {
                     System.out.println(res);
                 }
             });
+    }
+
+    private void getOneElement(RoutingContext context){
+        HttpMethod method = context.request().method();
+        System.out.println("HTTP method is "+ method);
+
+        String path = context.request().path();
+        System.out.println(path);
+        path = path.replaceAll("/", "");
+
+
+        String query = "Select * from products where id = " + '"' + path + '"';
+        System.out.println(query);
+
+        client.query(query, res->{
+            if(res.succeeded()){
+                context.response()
+                .setStatusCode(200)
+                .setStatusMessage("ok")
+                .end(res.result().getRows().toString());
+            }else{
+                context.response()
+                .setStatusCode(500)
+                .end("Database Error");
+            }
+        });
     }
 
     private void getSearch(RoutingContext context){
@@ -86,6 +114,8 @@ public class App extends AbstractVerticle {
             }
         });
     }
+
+
     
     private void updDetails(RoutingContext context){
         HttpMethod method = context.request().method();
