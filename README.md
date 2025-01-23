@@ -1,6 +1,6 @@
 # CRUD-app
 
-f<div> for getting all products detail end point is http:://localhost:8080 method : 'GET'
+for getting all products detail end point is http:://localhost:8080 method : 'GET'
 response will be array of json strings like [{id: ,name: ,price: ,quantity: ,description: ,},{....},{....}] with statusCode 200 and statusMessage OK
 in case of error it will be with statusCode 500 statusMessage database error</div>
 
