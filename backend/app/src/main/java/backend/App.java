@@ -81,8 +81,8 @@ public class App extends AbstractVerticle {
                 .end(resp.result().getRows().toString());
             }else{
                 context.response()
-                .setStatusCode(400)
-                .end("could not search");
+                .setStatusCode(500)
+                .end("Database error");
             }
         });
     }
@@ -117,8 +117,8 @@ public class App extends AbstractVerticle {
                     .end("updation has been done");
                 }else{
                     context.response()
-                    .setStatusCode(400)
-                    .end("updation not done");
+                    .setStatusCode(500)
+                    .end("Database error");
                 }
             });
         });
@@ -137,8 +137,8 @@ public class App extends AbstractVerticle {
                 .setStatusMessage("ok")
                 .end(res.result().getRows().toString());
             }else{
-                context.response().setStatusCode(200)
-                .setStatusMessage("ok")
+                context.response().setStatusCode(500)
+                .setStatusMessage("Database error")
                 .end("data not found");
             }
         });
@@ -170,7 +170,7 @@ public class App extends AbstractVerticle {
                 if(resp.succeeded()){
                     context.response().setStatusCode(200).setStatusMessage("ok").end("successfully added");
                 }else{
-                    context.response().setStatusCode(403).end("unable to add in database");
+                    context.response().setStatusCode(500).end("Database error");
                 }
             });
         });
@@ -197,8 +197,8 @@ public class App extends AbstractVerticle {
                     .end("delete data with id = " + params);
                 }else{
                     context.response()
-                    .setStatusCode(200)
-                    .end("could not delete");
+                    .setStatusCode(500)
+                    .end("Database error");
                 }
             });
         }
