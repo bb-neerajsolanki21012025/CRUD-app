@@ -30,8 +30,10 @@ const ProductForm = () => {
           console.error(error);  // Logs the error for debugging
           alert('Failed to fetch product details.');
         });
-    }
-  }, [id]); // Ensure the effect runs only when the id changes
+    } else {
+      setFormData({ name: '', description: '', price: '', quantity: '' });
+  }
+}, [id]); // Ensure the effect runs only when the id changes
 
   const handleSubmit = (e) => {
     e.preventDefault();
