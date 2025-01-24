@@ -21,10 +21,10 @@ public class App extends AbstractVerticle {
     public void start() {
         // ========  connection with database ======== //
             JsonObject config = new JsonObject()
-            .put("url", "jdbc:mysql://localhost:3306/crud_db")  // Database URL
+            .put("url", "jdbc:mysql://localhost:3306/testdb")  // Database URL
             .put("driver_class", "com.mysql.cj.jdbc.Driver")          // MySQL driver
-            .put("user", "shawon")                                      // Database username
-            .put("password", "1234")                                    // Database password
+            .put("user", "test")                                      // Database username
+            .put("password", "123")                                    // Database password
             .put("max_pool_size", 30);                                 // Max pool size (optional)
 
             // Create JDBC client

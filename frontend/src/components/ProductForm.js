@@ -4,7 +4,7 @@ import axios from '../axiosConfig';
 import Layout from './Layout';
 
 const ProductForm = () => {
-  const [formData, setFormData] = useState({ name: '', description: '', price: '', quantity: '' });
+  const [formData, setFormData] = useState({ name: '', description: '', price: 0, quantity: 0 });
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,11 +16,12 @@ const ProductForm = () => {
         .then((response) => {
           if (response.status === 200 && response.data) {
             setFormData({
-              name: response.data.name || '',
-              description: response.data.description || '',
-              price: response.data.price || '',
-              quantity: response.data.quantity || '',
-            }); // Populate form data
+              name: response.data[0].name || '',
+              description: response.data[0].description || '',
+              price: response.data[0].price || '',
+              quantity: response.data[0].quantity || '',
+            });
+             // Populate form data
           } else {
             alert(response.data.statusMessage || 'Failed to fetch product details.');
           }
